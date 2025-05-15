@@ -1,0 +1,6 @@
+DATASOURCE_URL=jdbc:mysql://localhost:3306/javashop
+DATASOURCE_USERNAME=din_db_user
+DATASOURCE_PASSWORD=din_db_lösenord
+
+GITHUB_CLIENT_ID=din_client_id_här
+GITHUB_CLIENT_SECRET=din_client_secret_här
