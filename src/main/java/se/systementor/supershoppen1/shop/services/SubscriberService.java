@@ -2,10 +2,7 @@ package se.systementor.supershoppen1.shop.services;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
-import net.bytebuddy.matcher.BooleanMatcher;
 import se.systementor.supershoppen1.shop.model.Product;
 import se.systementor.supershoppen1.shop.model.ProductRepository;
 import se.systementor.supershoppen1.shop.model.Subscriber;

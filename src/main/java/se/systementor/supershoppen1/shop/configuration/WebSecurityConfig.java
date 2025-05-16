@@ -44,21 +44,22 @@ public class WebSecurityConfig  {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-					.antMatchers("/", "/*", "/css/**", "/images/**", "/lib/**", "/scripts/**", "/static/**").permitAll()
-					.antMatchers("/admin/**").hasAnyRole("ADMIN")
-					.antMatchers("/user/**").hasAnyRole("USER")
-					.anyRequest().authenticated()
-                .and()
-                    .formLogin()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/*", "/css/**", "/images/**", "/lib/**", "/scripts/**", "/static/**").permitAll()
+                        .requestMatchers("/admin/**").hasAnyRole("ADMIN")
+                        .requestMatchers("/user/**").hasAnyRole("USER")
+                        .anyRequest().authenticated()
+                )
+                .formLogin(form -> form
                         .loginPage("/login")
+                        .defaultSuccessUrl("/", true)
                         .permitAll()
-                        .defaultSuccessUrl("/")
-                        .and()
-                .logout()
-					.permitAll()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/login");
+                )
+                .logout(logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                        .logoutSuccessUrl("/login")
+                        .permitAll()
+                );
 
 
         return http.build(); 
