@@ -14,27 +14,19 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
         <div class="container">
             <div class="mx-auto">
                 <h2>Log in</h2>
-            <form th:action="@{/login}" th:object="${loginForm}" method="post">
-              <div class="text--center" th:if="${param.error}"> Invalid username and password. </div> <div class="text--center" th:if="${param.logout}"> You have been logged out. </div>                
-                <p th:if="${error}" class="error">UserName & Password Incorrect</p>
-                        <div class="form-group">
-                            <label for="username">Email address</label>
-                          <input class="form-control" required type="email" name="username">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Lösenord</label>
-                          <input class="form-control" required type="password" name="password">
-                        </div>
-                          <button type="submit" class="btn btn-primary">
-                            Login
-                            </button>
-                      </form>
-                    </div>
+                <div th:if="${param.error}" class="alert alert-danger">
+                    Authentication failed. Please try again.
+                </div>
+
+                <a href="/oauth2/authorization/github" class="btn btn-dark">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                         style="width:20px; margin-right:10px;" alt="GitHub Logo" />
+                    Login with GitHub
+                </a>
+            </div>
         </div>
         <!-- /container -->
     </div>
-
-
 
 </body>
 </html>

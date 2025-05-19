@@ -11,7 +11,7 @@ import se.systementor.supershoppen1.shop.model.UserAccount;
 
 @Controller
 public class LoginController {
-    @RequestMapping("/login")
+    @GetMapping("/login")
         public String showLogin() {
             return "login";
         }
