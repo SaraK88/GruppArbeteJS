@@ -1,6 +1,7 @@
 package se.systementor.supershoppen1.shop.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -42,10 +43,24 @@ public class HomeController {
         }
 
         if (authentication != null && authentication.isAuthenticated()
-                && authentication.getPrincipal() instanceof OAuth2User user) {
+                && authentication.getPrincipal() instanceof OAuth2User oauthUser) {
 
-            String username = user.getAttribute("login");  // GitHub username
-            model.addAttribute("username", username);
+            Map<String, Object> attributes = oauthUser.getAttributes();
+            String username = null;
+
+            // Try GitHub-style first
+            if (attributes.containsKey("login")) {
+                username = (String) attributes.get("login");
+            }
+            // Fallback to Google-style
+            else if (attributes.containsKey("name")) {
+                username = (String) attributes.get("name");
+            }
+            else if (attributes.containsKey("given_name")) {
+                username = (String) attributes.get("given_name");
+            }
+
+            model.addAttribute("username", username != null ? username : "User");
         }
         
 
