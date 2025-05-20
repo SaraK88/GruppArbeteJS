@@ -50,8 +50,11 @@ public class WebSecurityConfig  {
                         .requestMatchers("/user/**").hasAnyRole("USER")
                         .anyRequest().authenticated()
                 )
+                .oauth2Login(oauth2 -> oauth2
+                        .loginPage("/login") // your custom login endpoint
+                )
                 .formLogin(form -> form
-                        .loginPage("/login")
+                        .loginPage("/admin")
                         .defaultSuccessUrl("/", true)
                         .permitAll()
                 )
