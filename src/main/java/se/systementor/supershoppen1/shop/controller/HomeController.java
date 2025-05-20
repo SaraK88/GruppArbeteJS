@@ -44,10 +44,29 @@ public class HomeController {
         if (authentication != null && authentication.isAuthenticated()
                 && authentication.getPrincipal() instanceof OAuth2User user) {
 
-            String username = user.getAttribute("login");  // GitHub username
+            String username = null;
+
+            // För GitHub
+            if (user.getAttribute("login") != null) {
+                username = user.getAttribute("login");
+            }
+            // För Discord
+            else if (user.getAttribute("username") != null) {
+                username = user.getAttribute("username");
+            }
+            // För Google
+            else if (user.getAttribute("name") != null) {
+                username = user.getAttribute("name");
+            }
+
+            if (username == null) {
+                username = "Guest";
+            }
+
             model.addAttribute("username", username);
         }
-        
+
+
 
         return "home";
     }
