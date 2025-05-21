@@ -43,7 +43,7 @@ public class HomeController {
         }
 
         if (authentication != null && authentication.isAuthenticated()
-                && authentication.getPrincipal() instanceof OAuth2User oauthUser) {
+                && authentication.getPrincipal() instanceof OAuth2User user) {
 
 
             String username = null;
