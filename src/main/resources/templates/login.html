@@ -12,20 +12,29 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
     <div class="section">
         <!-- container -->
         <div class="container">
-            <div class="mx-auto">
-                <h2>Log in</h2>
+            <div class="mx-auto" style="max-width: 300px;">
+            <h2>Log in</h2>
                 <div th:if="${param.error}" class="alert alert-danger">
                     Authentication failed. Please try again.
                 </div>
-
-                <a href="/oauth2/authorization/github" class="btn btn-dark">
+                <!-- GH login -->
+                <a href="/oauth2/authorization/github" class="btn btn-light mt-2 border w-100 d-flex align-items-center">
                     <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
                          style="width:20px; margin-right:10px;" alt="GitHub Logo" />
                     Login with GitHub
                 </a>
 
-                <a href="/oauth2/authorization/google" class="btn btn-danger">
-                    <img src="https://developers.google.com/identity/images/g-logo.png"
+                <!--Dc login -->
+                <a href="/oauth2/authorization/discord" class="btn btn-light mt-2 border w-100 d-flex align-items-center">
+                    <img src="https://cdn.icon-icons.com/icons2/2108/PNG/512/discord_icon_130958.png"
+                         style="width:20px; margin-right:10px;" alt="Discord Logo" />
+                    Login with Discord
+                </a>
+
+                <!-- Google login -->
+
+                <a href="/oauth2/authorization/google" class="btn btn-light mt-2 border w-100 d-flex align-items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Logo_2013_Google.png"
                          style="width:20px; margin-right:10px;" alt="Google Logo" />
                     Login with Google
                 </a>

@@ -45,24 +45,31 @@ public class HomeController {
         if (authentication != null && authentication.isAuthenticated()
                 && authentication.getPrincipal() instanceof OAuth2User oauthUser) {
 
-            Map<String, Object> attributes = oauthUser.getAttributes();
+
             String username = null;
 
-            // Try GitHub-style first
-            if (attributes.containsKey("login")) {
-                username = (String) attributes.get("login");
+            // För GitHub
+            if (user.getAttribute("login") != null) {
+                username = user.getAttribute("login");
             }
-            // Fallback to Google-style
-            else if (attributes.containsKey("name")) {
-                username = (String) attributes.get("name");
+            // För Discord
+            else if (user.getAttribute("username") != null) {
+                username = user.getAttribute("username");
             }
-            else if (attributes.containsKey("given_name")) {
-                username = (String) attributes.get("given_name");
+            // För Google
+            else if (user.getAttribute("name") != null) {
+                username = user.getAttribute("name");
             }
 
-            model.addAttribute("username", username != null ? username : "User");
+            if (username == null) {
+                username = "Guest";
+            }
+
+            model.addAttribute("username", username);
+
         }
-        
+
+
 
         return "home";
     }
