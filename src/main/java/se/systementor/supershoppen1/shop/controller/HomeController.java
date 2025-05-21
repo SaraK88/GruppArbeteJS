@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,7 @@ public class HomeController {
     }    
 
     @GetMapping(path="/")
-    String empty(Model model)
+    public String empty(Model model, Authentication authentication)
     {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Object ud = auth.getPrincipal();
@@ -39,7 +40,33 @@ public class HomeController {
             model.addAttribute("hideSubscription", false);
 
         }
-        
+
+        if (authentication != null && authentication.isAuthenticated()
+                && authentication.getPrincipal() instanceof OAuth2User user) {
+
+            String username = null;
+
+            // För GitHub
+            if (user.getAttribute("login") != null) {
+                username = user.getAttribute("login");
+            }
+            // För Discord
+            else if (user.getAttribute("username") != null) {
+                username = user.getAttribute("username");
+            }
+            // För Google
+            else if (user.getAttribute("name") != null) {
+                username = user.getAttribute("name");
+            }
+
+            if (username == null) {
+                username = "Guest";
+            }
+
+            model.addAttribute("username", username);
+        }
+
+
 
         return "home";
     }
