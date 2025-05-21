@@ -1,6 +1,7 @@
 package se.systementor.supershoppen1.shop.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -42,7 +43,8 @@ public class HomeController {
         }
 
         if (authentication != null && authentication.isAuthenticated()
-                && authentication.getPrincipal() instanceof OAuth2User user) {
+                && authentication.getPrincipal() instanceof OAuth2User oauthUser) {
+
 
             String username = null;
 
@@ -64,6 +66,7 @@ public class HomeController {
             }
 
             model.addAttribute("username", username);
+
         }
 
 
