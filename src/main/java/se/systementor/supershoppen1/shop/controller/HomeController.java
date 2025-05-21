@@ -72,5 +72,9 @@ public class HomeController {
         return productService.getAll();
     }
 
+    @GetMapping("/privacy")
+    public String privacy() {
+        return "privacy";
+    }
 
 }
