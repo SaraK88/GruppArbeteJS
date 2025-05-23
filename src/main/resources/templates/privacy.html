@@ -1,13 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layouttemplate :: layout (~{::body})}"
+>
 <head>
+    <meta charset="UTF-8"/>
     <title>Privacy Policy</title>
 </head>
 <body>
-<h1>Integritetspolicy</h1>
-<p>Vi samlar endast in din e-postadress vid inloggning.</p>
-<p>Inge känsliga eller personlig information lagras utan ditt medgivande.</p>
-<p>Uppgifterna används endast för att identifiera dig som användare i systemet.</p>
-<p>Kontakta oss vid frågor om dataskydd.</p>
+
+<div class="container">
+    <div class="mx-auto" style="max-width: 300px;">
+        <h1>Integritetspolicy</h1>
+        <div class="mx-auto" style="max-width: 600px;">
+            <p>Vi samlar endast in din e-postadress vid inloggning.</p>
+            <p>Inge känsliga eller personlig information lagras utan ditt medgivande.</p>
+            <p>Uppgifterna används endast för att identifiera dig som användare i systemet.</p>
+            <p>Kontakta oss vid frågor om dataskydd.</p>
+        </div>
+    </div>
+</div>
 </body>
 </html>
